@@ -5,13 +5,15 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import { Checkbox, FormControlLabel, IconButton, InputAdornment } from "@mui/material";
-
+import {useNavigate} from "react-router-dom";
+import img from '../../images/focus.png'
 const LoginPage = () => {
   const [emailOrPhone, setEmailOrPhone] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [keepMeLoggedIn, setKeepMeLoggedIn] = useState(false);
   const [errors, setErrors] = useState({ emailOrPhone: "", password: "" });
+  const route = useNavigate()
 
   const validateEmailOrPhone = (value) => {
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -34,6 +36,7 @@ const LoginPage = () => {
       password,
       keepMeLoggedIn,
     });
+    route('/overview')
   };
 
   return (
