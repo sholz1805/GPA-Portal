@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import Card from "@mui/material/Card";
@@ -18,7 +18,17 @@ const LoginPage = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [keepMeLoggedIn, setKeepMeLoggedIn] = useState(false);
   const [errors, setErrors] = useState({ emailOrPhone: "", password: "" });
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 960);
   const route = useNavigate();
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 600);
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   const validateEmailOrPhone = (value) => {
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -44,47 +54,50 @@ const LoginPage = () => {
     route("/overview");
   };
 
+  const containerStyles = {
+    position: "relative",
+    height: "100vh",
+    width: "100vw",
+    backgroundImage: `url('/images/focus.png')`,
+    backgroundSize: "cover",
+    backgroundRepeat: "no-repeat",
+    backgroundPosition: "center",
+  };
+
+  const overlayStyles = {
+    position: "absolute",
+    top: 0,
+    right: 0,
+    bottom: 0,
+    left: 0,
+    backgroundColor: "rgba(0, 0, 0, 0.7)",
+  };
+
+  const cardContainerStyles = {
+    position: "absolute",
+    top: "50%",
+    right: isMobile ? "auto" : "5%",
+    left: isMobile ? "50%" : "auto",
+    transform: isMobile ? "translate(-50%, -50%)" : "translateY(-50%)",
+    width: isMobile ? "90%" : "75%",
+    maxWidth: isMobile ? "400px" : "33%",
+    padding: "1rem",
+    boxSizing: "border-box",
+    transition: "all 0.3s ease",
+  };
+
+  const cardStyles = {
+    padding: "0.5rem",
+    width: "100%",
+    height: "auto",
+    borderRadius: "20px",
+  };
+
   return (
-    <div
-      style={{
-        position: "relative",
-        height: "100vh",
-        width: "100vw",
-        backgroundImage: `url('/images/focus.png')`,
-        backgroundSize: "cover",
-        backgroundRepeat: "no-repeat",
-        backgroundPosition: "center",
-      }}
-    >
-      <div
-        style={{
-          position: "absolute",
-          top: 0,
-          right: 0,
-          bottom: 0,
-          left: 0,
-          backgroundColor: "rgba(0, 0, 0, 0.7)",
-        }}
-      ></div>
-      <div
-        style={{
-          position: "absolute",
-          top: "50%",
-          right: "5%",
-          transform: "translateY(-50%)",
-          width: "75%",
-          maxWidth: "33%",
-          padding: "1rem",
-        }}
-      >
-        <Card
-          style={{
-            padding: "0.5rem",
-            width: "350px",
-            height: "440px",
-            borderRadius: "20px",
-          }}
-        >
+    <div style={containerStyles}>
+      <div style={overlayStyles}></div>
+      <div style={cardContainerStyles}>
+        <Card style={cardStyles}>
           <CardContent>
             <div
               style={{
