@@ -15,7 +15,7 @@ const DashboardLayout = ({children}) => {
                      updateSidebarOpen={updateSidebarOpen}/>
             <div className="flex-grow">
                 <Navbar openSidebar={updateSidebarOpen}/>
-                <main className='md:pr-20 flex-1 w-full'>
+                <main className=' flex-1 w-full'>
                     <div className="px-6 py-6 pt-28 mx-auto w-full">
                         <div className='w-full pt-2 lg:w-[calc(100%) - 18rem]'>
                             {children}
