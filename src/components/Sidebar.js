@@ -41,7 +41,7 @@ const Sidebar = ({openSidebar, updateSidebarOpen,}) => {
             route: '/financial',
             icon: <RiCashLine />,
         },{
-            name: 'User/User Group',
+            name: 'User Group',
             href: '/user',
             route: '/user',
             icon: <RiGroup2Line />,

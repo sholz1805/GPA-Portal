@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import DashboardLayout from "../DashboardLayout";
 import Card from "../../components/Card";
 import {
@@ -10,6 +10,7 @@ import {
 } from "react-icons/ri";
 import DoughnutChart from "./ChartData/DoughnutChart";
 import ChartsTable from "./ChartData/ChartTable";
+import Drawer from "@mui/material/Drawer";
 
 const formatNumber = (number, isCurrency = false) => {
   let formattedNumber = "";
@@ -58,6 +59,18 @@ const cardDetails = [
 ];
 
 const Overview = () => {
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+
+  const toggleDrawer = (open) => (event) => {
+    if (
+      event.type === "keydown" &&
+      (event.key === "Tab" || event.key === "Shift")
+    ) {
+      return;
+    }
+    setIsDrawerOpen(open);
+  };
+
   return (
     <DashboardLayout>
       <div className="text-[24px] font-[600] text-[#0D0D0D]">Overview</div>
@@ -98,9 +111,7 @@ const Overview = () => {
                 </div>
               </div>
 
-              <div
-                className="border border-[#D9D9D9] bg-white rounded-lg p-4 flex flex-col justify-between   min-h-full md:min-h-[300px]"
-              >
+              <div className="border border-[#D9D9D9] bg-white rounded-lg p-4 flex flex-col justify-between   min-h-full md:min-h-[300px]">
                 <div className="border-b border-[#D9D9D9] p-2 bg-green flex justify-between">
                   <p className="font-medium text-base">
                     Zonal financial breakdown
@@ -121,8 +132,31 @@ const Overview = () => {
               className="w-full lg:w-[37%] border border-[#D9D9D9] bg-white rounded-lg p-4 flex flex-col justify-between"
               style={{ height: "600px" }}
             >
-              <p className="font-bold text-xl">Content 2</p>
-              <p>Additional content goes here</p>
+              <div className="border-b border-[#D9D9D9] p-2 bg-green flex justify-between">
+                <p className="font-medium text-base">Recent Activities</p>
+                <a
+                  className="text-[#2D56A8] underline cursor-pointer"
+                  onClick={toggleDrawer(true)}
+                >
+                  See all
+                </a>
+              </div>
+
+              <Drawer
+                anchor="right"
+                open={isDrawerOpen}
+                onClose={toggleDrawer(false)}
+              >
+                <div
+                  style={{ width: 400 }}
+                  role="presentation"
+                  onClick={toggleDrawer(false)}
+                  onKeyDown={toggleDrawer(false)}
+                >
+                  <p style={{ padding: "1rem" }}>All Recent Activities</p>
+                  {/* Add your drawer content here */}
+                </div>
+              </Drawer>
             </div>
           </div>
         </div>
