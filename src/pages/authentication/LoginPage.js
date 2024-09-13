@@ -4,16 +4,21 @@ import Button from "@mui/material/Button";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
-import { Checkbox, FormControlLabel, IconButton, InputAdornment } from "@mui/material";
-import {useNavigate} from "react-router-dom";
-import img from '../../images/focus.png'
+import {
+  Checkbox,
+  FormControlLabel,
+  IconButton,
+  InputAdornment,
+} from "@mui/material";
+import { useNavigate } from "react-router-dom";
+
 const LoginPage = () => {
   const [emailOrPhone, setEmailOrPhone] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [keepMeLoggedIn, setKeepMeLoggedIn] = useState(false);
   const [errors, setErrors] = useState({ emailOrPhone: "", password: "" });
-  const route = useNavigate()
+  const route = useNavigate();
 
   const validateEmailOrPhone = (value) => {
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -36,7 +41,7 @@ const LoginPage = () => {
       password,
       keepMeLoggedIn,
     });
-    route('/overview')
+    route("/overview");
   };
 
   return (
@@ -140,14 +145,20 @@ const LoginPage = () => {
                   <Typography
                     variant="body2"
                     color="error"
-                    style={{ fontSize: "12px"}}
+                    style={{ fontSize: "12px" }}
                   >
                     {errors.emailOrPhone}
                   </Typography>
                 )}
               </div>
               <div>
-                <p style={{ fontSize: "14px", fontWeight: "500", marginTop:'0.5rem' }}>
+                <p
+                  style={{
+                    fontSize: "14px",
+                    fontWeight: "500",
+                    marginTop: "0.5rem",
+                  }}
+                >
                   Your password
                 </p>
                 <TextField
@@ -200,7 +211,9 @@ const LoginPage = () => {
                       color="primary"
                     />
                   }
-                  label={<span style={{ fontSize: '12px' }}>Keep me logged in</span>}
+                  label={
+                    <span style={{ fontSize: "12px" }}>Keep me logged in</span>
+                  }
                 />
                 <a
                   href="/"
