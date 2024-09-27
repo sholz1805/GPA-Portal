@@ -61,7 +61,7 @@ const Sidebar = ({openSidebar, updateSidebarOpen,}) => {
     }
     return (
         <div onBlur={handleOnBlur} className={`fixed inset-y-0 left-0 z-30 overflow-hidden overflow-y-auto transition duration-300 transform lg:translate-x-0 lg:static lg:inset-0 
-        h-screen w-[248px] bg-[#FFFFFF] text-white drop-shadow-4xl flex flex-col px-8 ${ openSidebar ? 'translate-x-0 ease-out block' : '-translate-x-full ease-in'}`}>
+        w-[248px] bg-[#FFFFFF] text-white drop-shadow-4xl flex flex-col px-8 ${ openSidebar ? 'translate-x-0 ease-out block' : '-translate-x-full ease-in'}`}>
             <div className="flex items-center space-x-4">
                 <div className="flex items-center space-x-4 pt-12">
                     <img src="/images/GPA%20Logo.svg" alt={'logo'}/>
