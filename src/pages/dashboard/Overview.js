@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import DashboardLayout from "../DashboardLayout";
 import Card from "../../components/Card";
 import {
@@ -6,10 +6,11 @@ import {
   RiTeamLine,
   RiCashLine,
   RiGitBranchLine,
-  RiArrowDownSLine ,
+  RiArrowDownSLine,
 } from "react-icons/ri";
 import DoughnutChart from "./ChartData/DoughnutChart";
 import ChartsTable from "./ChartData/ChartTable";
+import Drawer from "@mui/material/Drawer";
 
 const formatNumber = (number, isCurrency = false) => {
   let formattedNumber = "";
@@ -58,6 +59,18 @@ const cardDetails = [
 ];
 
 const Overview = () => {
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+
+  const toggleDrawer = (open) => (event) => {
+    if (
+      event.type === "keydown" &&
+      (event.key === "Tab" || event.key === "Shift")
+    ) {
+      return;
+    }
+    setIsDrawerOpen(open);
+  };
+
   return (
     <DashboardLayout>
 
@@ -77,28 +90,28 @@ const Overview = () => {
           </div>
         </div>
 
-        <div className="flex flex-col lg:flex-row justify-center mt-5">
-          <div className="w-full lg:max-w-screen-xl bg-transparent px-4">
-            <div className="flex flex-col lg:flex-row gap-4">
-              <div className="w-full lg:w-[63%] flex flex-col gap-4">
-                <div
-                    className="border border-[#D9D9D9] bg-white rounded-lg p-4 flex flex-col justify-between"
-                    style={{ height: "300px" }}
-                >
-                  <div className="border-b border-[#D9D9D9] p-2 bg-green flex justify-between">
-                    <p className="font-medium text-base">
-                      Zonal Members breakdown
-                    </p>
-                    <button className="border border-[#D9D9D9] cursor-pointer p-2 rounded-lg flex justify-between items-center space-x-2">
-                      <span >All time</span>
-                      <RiArrowDownSLine  className="text-[#0D0D0D] text-m" />
-                    </button>
-                  </div>
-                  <div className="flex-1 p-1 flex justify-between items-center">
-                    <DoughnutChart />
-                    <ChartsTable/>
-                  </div>
+      <div className="flex flex-col lg:flex-row justify-center mt-5">
+        <div className="w-full lg:max-w-screen-xl bg-transparent px-4">
+          <div className="flex flex-col lg:flex-row gap-4">
+            <div className="w-full lg:w-[63%] flex flex-col gap-4">
+              <div
+                className="border border-[#D9D9D9] bg-white rounded-lg p-4 flex flex-col justify-between"
+                style={{ height: "300px" }}
+              >
+                <div className="border-b border-[#D9D9D9] p-2 bg-green flex justify-between">
+                  <p className="font-medium text-base">
+                    Zonal Members breakdown
+                  </p>
+                  <button className="border border-[#D9D9D9] cursor-pointer p-2 rounded-lg flex justify-between items-center space-x-2">
+                    <span >All time</span>
+                    <RiArrowDownSLine  className="text-[#0D0D0D] text-m" />
+                  </button>
                 </div>
+                <div className="flex-1 p-1 flex justify-between items-center">
+                <DoughnutChart />
+                <ChartsTable/>
+              </div>
+              </div>
 
                 <div
                     className="border border-[#D9D9D9] bg-white rounded-lg p-4 flex flex-col justify-between"
